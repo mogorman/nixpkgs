@@ -1855,6 +1855,8 @@ with pkgs;
     gtk = gtk3;
   };
 
+  deltachat-core = callPackage ../applications/networking/instant-messengers/deltachat-core { };
+
   dex = callPackage ../tools/X11/dex { };
 
   ddccontrol = callPackage ../tools/misc/ddccontrol { };
