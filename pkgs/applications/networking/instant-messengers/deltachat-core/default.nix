@@ -1,17 +1,21 @@
-{ stdenv, fetchFromGitHub, libetpan, meson, ninja, openssl, sqlite, zlib, pkgconfig, cyrus_sasl, bzip2 }:
+{ stdenv, fetchFromGitHub, libetpan, meson, ninja, openssl, sqlite, zlib, pkgconfig, cyrus_sasl, bzip2, git }:
 
 stdenv.mkDerivation rec {
   name = "deltachat-core-${version}";
-  version = "0.15.0";
+  version = "v0.15.0-69-g35846dc";
 
   src = fetchFromGitHub {
-    owner = "deltachat";
+    owner = "mogorman";
     repo = "deltachat-core";
-    rev = "v${version}";
-    sha256 = "1qp28cfnnk9hazq3xmsy03wfgij4njfgkv9b243hkfl781si37pl";
+    rev = "${version}";
+    sha256 = "1jwschgzbmzx5vkfccg2gcy51pdhf59rvx7fzayi9r3f29m2719p";
   };
 
-  nativeBuildInputs = [ meson ninja pkgconfig openssl sqlite zlib cyrus_sasl bzip2 libetpan ];
+  nativeBuildInputs = [ meson ninja pkgconfig openssl sqlite zlib cyrus_sasl bzip2 libetpan git ];
+  postInstall = ''
+    ls $out/lib
+    sed -i 's/unknown-error/${version}/' $out/lib/pkgconfig/deltachat.pc
+  '';
 
   meta = with stdenv.lib; {
     homepage = https://delta.chat;
