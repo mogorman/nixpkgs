@@ -7,9 +7,11 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "deltachat";
     repo = "deltachat-core";
-    rev = "${version}";
-    sha256 = "22xpz316jmns6i143v4j6sd6k0a4a54alw08rvwjckf2rig57lj2";
+    rev = "v${version}";
+    sha256 = "1qp28cfnnk9hazq3xmsy03wfgij4njfgkv9b243hkfl781si37pl";
   };
+
+  nativeBuildInputs = [ meson ninja pkgconfig openssl sqlite zlib cyrus_sasl bzip2 libetpan ];
 
   meta = with stdenv.lib; {
     homepage = https://delta.chat;
