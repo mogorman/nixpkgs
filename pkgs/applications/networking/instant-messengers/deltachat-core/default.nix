@@ -12,6 +12,7 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ meson ninja pkgconfig openssl sqlite zlib cyrus_sasl bzip2 libetpan git ];
+
   postInstall = ''
     ls $out/lib
     sed -i 's/unknown-error/${version}/' $out/lib/pkgconfig/deltachat.pc
